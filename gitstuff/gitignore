@@ -1,0 +1,8 @@
+# pattern cheatsheet: https://www.w3schools.com/git/git_ignore.asp
+input
+output
+.ipynb_checkpoints
+.DS_Store
+.Rproj
+.Rhistory
+.log
