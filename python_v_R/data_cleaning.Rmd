@@ -1,0 +1,100 @@
+# R setup
+### for data cleaning
+```{r}
+library(arrow)
+library(tidyverse)
+library(stringr)
+library(lubridate)
+library(janitor)
+library(humaniformat)
+library(skimr)
+```
+
+### for using Python in Rmarkdown
+```{r}
+library(reticulate)
+use_python("/Users/home/opt/miniconda3/bin/python") # where python is in my env
+```
+
+# Python setup
+### for data cleaning
+```{python}
+import re
+import numpy as np
+import pandas as pd
+import janitor
+import nameparser
+```
+
+# Data setup
+Although both languages are available to this RMarkdown file, they aren't sharing a Namespace and variables, so we either have to define the table in both languages or pick one and make the other reference it.
+
+Here, we choose to define it in both for the sake of the demo. However, if we had defined it only in R, we could still call it in Python cells by prefixing the variable name with `r.`, ie. `r.df.columns`. If we had defined it only in python, we could still call it in R cells by prefixing it with `py$`, ie. `names(py$df)`.
+
+Read more about using the reticulate package in Rmd files [here](https://rstudio.github.io/reticulate/articles/r_markdown.html).
+
+```{r}
+demo_f <- "flights.csv"
+dpa_f <- "../../SF-PDO-DPA-reports/filter/output/complaints.parquet"
+demo <- read_csv(demo_f)
+dpa <- read_parquet(dpa_f)
+```
+
+```{python}
+demo = pd.read_csv(r.demo_f)
+dpa = pd.read_parquet(r.dpa_f)
+```
+
+- Why is it safe to use the same variable names in the R and Python cells here? When the Python cell runs, does it overwrite the variables the R cell created?
+- Python is getting the `read_parquet()` method from the prefixed library, `pd` or `pandas`. What package is used in the R cell?
+
+# Previewing data
+### columns
+```{r}
+sort(names(demo))
+```
+```{python}
+sorted(demo.columns)
+```
+
+- Which package and/or data structure gives us the column names?
+
+### single record
+```{r}
+t(sample_n(demo, 1))
+```
+
+```{python}
+demo.sample().T
+```
+
+### whole table
+There are a lot of ways to do this in either language, depending on what characteristics you're interested in. R's [`skimr`](https://cran.r-project.org/web/packages/skimr/vignettes/skimr.html) gets a pretty good spread and is a bit more comprehensive than the `pandas` built-in `DataFrame.info()` method.
+
+The completion rate and number of unique values in a column are especially useful in identifying data fields that may be free response and require some keyword searches or canonicalization to unpack. For datetime fields, it could be an early signal that timestamps are included in the datetime format.
+
+Get comfy checking the datatype of a column and formatting it if it's not as expected. For instance, are you expecting ages as numbers? Do you have numeric age data? Are there a couple exceptions that can't be converted to a numeric datatype or is the field more like an age group? When we have this data, it's usually something we look to include in analyses somehow, so if you expect ages to be numeric, your analyst probably does, too.
+
+```{r}
+skim(demo)
+```
+
+```{python}
+demo.info()
+```
+
+# Format data
+
+### column names
+In Python, `DataFrame.rename(columns={'oldname': 'newname'})` works plenty well, but it's super useful to standardize data without having to look at it and decide what changes are necessary. R's [`janitor`](https://www.rdocumentation.org/packages/janitor/versions/2.2.0/topics/clean_names) package is excellent at doing this quickly, and Python parrots this with the [`pyjanitor`](https://pyjanitor-devs.github.io/pyjanitor/#why-janitor) package.
+```{r}
+names(clean_names(demo))
+```
+
+- What datatype comes out of `clean_names(demo)`?
+
+```{python}
+janitor.clean_names(demo).columns
+```
+
+# done.
