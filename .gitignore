@@ -1,2 +1,5 @@
-.ipynb_checkpoints
-.Rhistory
+*.ipynb_checkpoints
+*.Rhistory
+*__pycache__
+*.ipynb_checkpoints
+*.pyc
