@@ -1,4 +1,10 @@
+# Comparing R and Python data cleaning workflows
+
+There's a ton of stuff you can do in _both_ R and Python, and knowing the [tradeoffs](https://medium.com/@scott.fortknox/comparing-and-contrasting-r-and-python-in-data-science-9577bc31bcd0) of the two can useful in refining your toolkit and workflows. Broadly speaking there are a lot more [R packages](https://cran.r-project.org/web/packages/available_packages_by_name.html)
+with ready-to-go methods that are commonly useful in our practice. [Python packages](https://pypi.org/search/?q=data+science&o=-created&c=Programming+Language+%3A%3A+Python+%3A%3A+3) have their fair share of handy methods, too, but where R might have something out-of-the-box you could deploy, Python lends support to defining a highly readable method of your own. There are a lot of "right" answers with either route! Think about what you have time for upfront and weigh the overhead/runtime of your approach after you have something working. 
+
 # R setup
+
 ### for data cleaning
 ```{r}
 library(arrow)
@@ -18,6 +24,9 @@ use_python("/Users/home/opt/miniconda3/bin/python") # where python is in my env
 
 # Python setup
 ### for data cleaning
+
+Python does have a version of R's `lubridate` for date handling, [`pylubridate`](https://pylubridate.readthedocs.io/en/latest/index.html), but it's not actively maintained, so use mindfully.
+
 ```{python}
 import re
 import numpy as np
