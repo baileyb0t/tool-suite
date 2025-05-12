@@ -1,0 +1,44 @@
+snippet header
+    # vim: set ts=4 sts=0 sw=4 si fenc=utf-8 et:
+    # vim: set fdm=marker fmr={{{,}}} fdl=0 foldcolumn=4:
+    # Authors:     BP
+    # Maintainers: BP
+    # Copyright:   2024, HRDAG, GPL v2 or later
+    # =========================================
+    
+snippet dependencies-tag
+    # ---- dependencies {{{
+    #}}}
+    
+snippet import-basic
+    library(pacman)
+    pacman::p_load(argparse, assertr, logger, tidyverse)
+    
+snippet support-methods-tag
+    # --- support methods --- {{{
+    # }}}
+    
+snippet getargs
+    getargs <- function() {
+        parser <- ArgumentParser()
+        parser$add_argument("--input")
+        parser$add_argument("--output")
+        args <- parser$parse_args()
+        args
+    }
+    
+snippet setlog
+    setlog <- function(logname) {
+        log_appender(appender_tee(logname))
+    }
+    
+snippet main-tag
+    # --- main --- {{{
+    # }}}
+    
+snippet main-basic
+    logname <- "output/script.log"
+    setlog(logname)
+    args <- getargs()
+    
+    log_info("done", logger="")
