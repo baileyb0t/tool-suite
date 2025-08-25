@@ -38,7 +38,7 @@ def setuplogging(logfile):
 
 
 def getcreds():
-    with open("/Users/home/git/dotfiles/creds/ds_airtable", "r") as f:
+    with open(args.creds, "r") as f:
         out = f.readline()
     return out
 

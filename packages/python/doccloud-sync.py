@@ -158,15 +158,15 @@ if __name__ == '__main__':
     docsdf = build_docdf(docs=docs)
     docsdf = addrd(df=docsdf)
 
-    # TODO: open this up to the full collection once we know its working
-    less = docsdf.head(10)
-
     logger.info('(3/5) pulling annotations')
     annotsdf = build_annotdf(df=docsdf)
 
     logger.info(f'(4/5) writing pdf data locally in {args.outdir}')
-    docsdf['localcopy'] = docsdf[['rd', 'doc']].apply(lambda row: writepdf(
-        fname=f"{args.outdir}/{row.rd}.pdf", pdfbyts=row.doc.pdf), axis=1)
+    docsdf['localcopy'] = docsdf[['rd', 'doc']].apply(
+        lambda row: writepdf(
+            fname=f"{args.outdir}/{row.rd}.pdf",
+            pdfbyts=row.doc.pdf),
+        axis=1)
 
     logger.info('(5/5) writing reference tables')
     docsdf.loc[:, docsdf.columns != 'doc'].to_parquet(args.outpdfs)
