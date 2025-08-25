@@ -1,0 +1,12 @@
+[32m2025-08-24⋅at⋅18:45:09[0m⋅[1msetting up html data[0m
+[32m2025-08-24⋅at⋅18:45:09[0m⋅[1mbegin re-structuring table data[0m
+[32m2025-08-24⋅at⋅18:45:09[0m⋅[1mfound 31 headers and 32 tables in the soup; expecting same count[0m
+[32m2025-08-24⋅at⋅18:45:09[0m⋅[1mfirst header:[0m
+[32m2025-08-24⋅at⋅18:45:09[0m⋅[1mfirst row:[0m
+[32m2025-08-24⋅at⋅18:45:09[0m⋅[1m
+last header:[0m
+[32m2025-08-24⋅at⋅18:45:09[0m⋅[1mlast row:[0m
+[32m2025-08-24⋅at⋅18:45:09[0m⋅[1mstandardizing column names[0m
+[32m2025-08-24⋅at⋅18:45:09[0m⋅[1mwriting output[0m
+[32m2025-08-24⋅at⋅18:45:09[0m⋅[1moutput/lost.yml written successfully[0m
+[32m2025-08-24⋅at⋅18:45:09[0m⋅[1mdone[0m
