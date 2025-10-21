@@ -39,8 +39,8 @@ def text_statistic(pcs, sig, n, df, null_phrase, exp=None):
     rounded_stat = format_longfloat(pcs.statistic)
     rounded_pval = format_longfloat(pcs.pvalue)
     if rounded_pval == 0: rounded_pval = "< 0.0001"
-    if exp: newinfo = f"\n\tThis test results in a **p-value of {rounded_pval}**, "
-    else: newinfo = f"\n\tThis test results in a **p-value of {rounded_pval}**, "
+    if exp: newinfo = f"\nThis test results in a **p-value of {rounded_pval}**, "
+    else: newinfo = f"\nThis test results in a **p-value of {rounded_pval}**, "
     if pcs.pvalue < sig:
         newinfo += f"which is a statistically significant difference and rejects the null hypothesis that {null_phrase}. "
     else: newinfo += f"which is not statistically significant and fails to reject the null hypothesis that {null_phrase}. "
