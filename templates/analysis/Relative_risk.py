@@ -78,13 +78,13 @@ def add_relrisk_results(treat_event, control_event, outcome_event, outcome_op, r
         relrisk_info = f"""The ratio of the probability that {
             treat_event} {outcome_op} {outcome_event} compared to the probability that {
             control_event} {outcome_op} {outcome_event
-            } **could not be calculated** because there were {rat}.\n\n\t"""
+            } **could not be calculated** because there were {rat}.\n\n"""
     elif np.isinf(rat):
         print(treat_event, control_event, rat)
     else:
         relrisk_info = f"""The ratio of the probability that {
             treat_event} {outcome_op} {outcome_event} compared to the probability that {
-            control_event} {outcome_op} {outcome_event} is {rat:.3f}.\n\n\t"""
+            control_event} {outcome_op} {outcome_event} is {rat:.3f}.\n\n"""
         relrisk_info += supp_risk_line(
             treat_event=treat_event,
             control_event=control_event,
@@ -130,7 +130,7 @@ class Contingency():
             columns=df['race_ethnicity'],
             margins=True, margins_name='Total'
             ).reindex([True, False, 'Total']).reset_index().rename(columns={
-            OUTCOME_EVENT_COL: self.labels[OUTCOME_EVENT_COL],})
+            OUTCOME_EVENT_COL: f'{self.labels[OUTCOME_EVENT_COL]} given {self.labels[GIVEN_EVENT_COL]}',})
         # this is where to swap in labels instead of T/F
         #table[OUTCOME_EVENT_COL] = table[OUTCOME_EVENT_COL].replace({True: 'Conviction', False: 'No conviction'})
         html = get_table(
@@ -163,7 +163,7 @@ class Contingency():
             columns=df[COMPARISON_GROUP_COL],
             margins=True, margins_name='Total'
             ).reindex([True, False, 'Total']).reset_index().rename(columns={
-            OUTCOME_EVENT_COL: self.labels[OUTCOME_EVENT_COL],})
+            OUTCOME_EVENT_COL: f'{self.labels[OUTCOME_EVENT_COL]} given {self.labels[GIVEN_EVENT_COL]}',})
         # this is where to swap in labels instead of T/F
         #table[OUTCOME_EVENT_COL] = table[OUTCOME_EVENT_COL].replace({True: 'Conviction', False: 'No conviction'})
         html = get_table(
